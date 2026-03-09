@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VPS Lakeshore — Clinical Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700;6..12,800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:        #003087;
+      --navy-dark:   #001f5c;
+      --navy-mid:    #004aad;
+      --navy-light:  #e8eef8;
+      --navy-pale:   #f0f4fb;
+      --crimson:     #C8102E;
+      --crimson-dark:#9b0a22;
+      --crimson-light:#fdeaed;
+      --white:       #ffffff;
+      --gray-50:     #f8f9fc;
+      --gray-100:    #f0f2f7;
+      --gray-200:    #e2e6ef;
+      --gray-300:    #c8cee0;
+      --gray-500:    #6b748f;
+      --gray-700:    #2d3350;
+      --gray-900:    #111827;
+      --teal:        #0b6e6e;
+      --teal-light:  #e5f5f5;
+      --font-body:   'Nunito Sans', sans-serif;
+      --font-display:'Playfair Display', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOPBAR ── */
+    header {
+      background: var(--navy-dark);
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--crimson);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.2px;
+    }
+
+    .logo-text span {
+      color: var(--gray-300);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 400;
+      display: block;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-top: -2px;
+    }
+
+    .header-cta {
+      background: var(--crimson);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 9px 22px;
+      border-radius: 7px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: background 0.18s ease, transform 0.12s ease;
+    }
+
+    .header-cta:hover {
+      background: var(--crimson-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+      padding: 96px 40px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(200,16,46,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(34,197,94,0.3);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 22px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #adc4f0;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--crimson);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 9px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+      box-shadow: 0 4px 18px rgba(200,16,46,0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--crimson-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,16,46,0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 9px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background 0.18s, transform 0.12s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.17);
+      transform: translateY(-2px);
+    }
+
+    /* ── FEATURE STRIP ── */
+    .strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 22px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .strip-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .strip-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--navy-light);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .section {
+      padding: 80px 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .section-sub {
+      font-size: 15.5px;
+      color: var(--gray-500);
+      max-width: 540px;
+      margin-bottom: 52px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 28px 26px;
+      transition: box-shadow 0.2s, transform 0.18s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 8px 32px rgba(0,48,135,0.1);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .icon-navy  { background: var(--navy-light); }
+    .icon-crimson { background: var(--crimson-light); }
+    .icon-teal  { background: var(--teal-light); }
+
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 7px;
+    }
+
+    .feature-card p {
+      font-size: 13.5px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      border-radius: 16px;
+      padding: 56px 48px;
+      text-align: center;
+      margin: 0 40px 80px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(200,16,46,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-banner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .cta-banner p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 32px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 12.5px;
+    }
+
+    footer strong {
+      color: rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 0 20px; }
+      .hero  { padding: 64px 20px 72px; }
+      .strip { gap: 20px; padding: 20px; }
+      .section { padding: 56px 20px; }
+      .cta-banner { padding: 40px 24px; margin: 0 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo" href="index.html">
+      <div class="logo-mark">VL</div>
+      <div class="logo-text">
+        VPS Lakeshore
+        <span>Clinical Management System</span>
+      </div>
+    </a>
+    <a class="header-cta" href="app.html">Launch System →</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">System Online — v3.0</div>
+    <h1>Clinical Care, <em>Streamlined</em><br>for Modern Practice</h1>
+    <p>A unified platform for patient records, appointments, billing, and clinical workflows — built for the VPS Lakeshore team.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="app.html">Enter the System</a>
+      <a class="btn-secondary" href="#features">Explore Features ↓</a>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-item"><span class="strip-icon">🏥</span> Patient Management</div>
+    <div class="strip-item"><span class="strip-icon">📅</span> Appointment Scheduling</div>
+    <div class="strip-item"><span class="strip-icon">💊</span> Prescriptions & Labs</div>
+    <div class="strip-item"><span class="strip-icon">💳</span> Billing & Invoicing</div>
+    <div class="strip-item"><span class="strip-icon">📊</span> Analytics Dashboard</div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section" id="features">
+    <div class="section-label">Core Modules</div>
+    <h2 class="section-title">Everything your clinic needs,<br>in one place</h2>
+    <p class="section-sub">Designed around clinical workflows so staff spend less time on administration and more time on care.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-navy">🧑‍⚕️</div>
+        <h3>Patient Records</h3>
+        <p>Comprehensive patient profiles with medical history, visit notes, allergies, and care timelines — always at your fingertips.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-crimson">📅</div>
+        <h3>Scheduling</h3>
+        <p>Real-time appointment booking with provider calendars, automated reminders, and waitlist management built in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-teal">💳</div>
+        <h3>Billing & Claims</h3>
+        <p>Generate invoices, track payments, and manage insurance claims from a single, streamlined billing dashboard.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-navy">💊</div>
+        <h3>Prescriptions & Labs</h3>
+        <p>Issue prescriptions and track lab orders with status updates and result notifications linked to patient records.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-crimson">📊</div>
+        <h3>Analytics</h3>
+        <p>Operational dashboards for patient throughput, revenue, appointment trends, and provider performance metrics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-teal">🔒</div>
+        <h3>Secure Access</h3>
+        <p>Role-based login for doctors, nurses, and admin staff — with audit trails and session management built in.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <h2>Ready to get started?</h2>
+    <p>Log in with your VPS Lakeshore credentials to access the full system.</p>
+    <a class="btn-primary" href="app.html">Enter the System →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>VPS Lakeshore</strong> — Clinical Management System v3 &nbsp;·&nbsp; Internal Use Only
+  </footer>
+
+</body>
+</html>
